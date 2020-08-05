@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import UsersList from './components/UsersList';
-class App extends Component {
-  render() {
-    return (
-      <>
-        <UsersList />
-      </>
-    );
-  }
+import Stopwatch from './components/Stopwatch';
+import Calendar from './components/Calendar';
+
+function App() {
+//  return <Stopwatch />;
+  return <Calendar />;
 }
 
 export default App;

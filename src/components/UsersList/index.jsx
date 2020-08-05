@@ -1,60 +1,24 @@
 import React, { Component } from 'react';
 import UserListItem from './UserListItem';
 
-class UsersList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [
-        {
-          id: 1,
-          firstName: 'Test',
-          lastName: 'Testovich',
-          isSelected: false,
-        },
-        {
-          id: 2,
-          firstName: 'Test2',
-          lastName: 'Testovich2',
-          isSelected: false,
-        },
-        {
-          id: 3,
-          firstName: 'Test3',
-          lastName: 'Testovich3',
-          isSelected: false,
-        },
-        {
-          id: 4,
-          firstName: 'Test4',
-          lastName: 'Testovich4',
-          isSelected: false,
-        },
-      ],
-    };
-  }
-  onUserSelectHandler = index => {
-    const { users } = this.state;
+const UsersList = props => {
+  const { users, setUsers } = props;
+
+  const onUserSelectHandler = index => {
     const newUsers = [...users];
     newUsers[index].isSelected = !newUsers[index].isSelected;
-    this.setState({
-      users: newUsers,
-    });
+    setUsers(newUsers);
   };
 
-  mapUsers = () => {
-    const { users } = this.state;
-    return users.map((u, index) => (
-      <UserListItem
-        key={u.id}
-        user={u}
-        isSelected={u.isSelected}
-        onSelect={() => this.onUserSelectHandler(index)}
-      />
-    ));
-  };
-  render() {
-    return <ul>{this.mapUsers()}</ul>;
-  }
-}
+  const mapUser = (user, index) => (
+    <UserListItem
+      key={user.id}
+      user={user}
+      isSelected={user.isSelected}
+      onSelect={() => onUserSelectHandler(index)}
+    />
+  );
+
+  return <ul>{users.map(mapUser)}</ul>;
+};
 export default UsersList;
