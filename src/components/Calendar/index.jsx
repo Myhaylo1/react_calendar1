@@ -1,53 +1,64 @@
 import React from 'react';
 import styles from './Calendar.module.scss';
-import * as dateFns from 'date-fns';
+//import * as dateFns from 'date-fns';
+
+// class Calendar extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//     }
+//   }
+//   render() {
+//     return (
+//       <article className={styles.calendarContainer}>
+//         <article className={styles.calendarSheet}>
+//           <h3>ПрЮвет ВОЛКУ!!!</h3>
+//         </article>
+//         <article className={styles.calendarSheet}>
+//           <h3>ПрЮвет ЗАЙЦУ!!!</h3>
+//         </article>
+//       </article>
+//     )
+//   }
+// }
+
+// class Calendar extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//     }
+//   }
+//   render() {
+//     return (
+//       React.createElement("article", {className: styles.calendarContainer},
+//         React.createElement("article", {className: styles.calendarSheet},
+//           React.createElement("h3", null, 'ПрЮвет ВОЛКУ!!!')
+//         ),
+//         React.createElement("article", {className: styles.calendarSheet},
+//           React.createElement("h3", null, 'ПрЮвет ВОЛКУ!!!')
+//         )
+//       )
+//     )
+//   }
+// }
+
+class Hello extends React.Component {
+  render() {
+    return <div className={this.props.className}>Привет, {this.props.toWhat}!</div>;
+  }
+}
 
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDate: new Date()
+//      currentDate: new Date()
     }
   }
-
   render() {
-    let {currentDate} = this.state;
     return (
-      <article>
-        <div className={styles.container}>
-          // {currentDate.toLocaleDateString()}
-          {dateFns.format(currentDate, 'Do = ww')}
-        </div>
-        <button
-          onClick={() => {
-            this.setState({
-              currentDate: dateFns.add(currentDate, {
-                years: 1
-              })
-            })
-          }}
-        >Add year
-        </button>
-        <button
-          onClick={() => {
-            this.setState({
-              currentDate: dateFns.add(currentDate, {
-                month: 1
-              })
-            })
-          }}
-        >Add month
-        </button>
-        <button
-          onClick={() => {
-            this.setState({
-              currentDate: dateFns.add(currentDate, {
-                date: 1
-              })
-            })
-          }}
-        >Add date
-        </button>
+      <article className={styles.calendarContainer}>
+//        <Hello className={styles.calendarSheet} toWhat="мир" />
       </article>
     )
   }
