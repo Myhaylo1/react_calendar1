@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Stopwatch from './components/Stopwatch';
+//import Stopwatch from './components/Stopwatch';
 import Calendar from './components/Calendar';
 
 function App() {
