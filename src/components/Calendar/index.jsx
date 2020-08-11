@@ -8,6 +8,18 @@ let currentDateDay=currentDate.toLocaleString('en-US',{day: 'numeric'})
 let currentDateMonth=currentDate.toLocaleString('en-US',{month: 'long'})
 let currentDateYear=currentDate.toLocaleString('en-US',{year: 'numeric'})
 let currentDateMonthYear=currentDate.toLocaleString('en-US',{month: 'long', year: 'numeric'})
+let cellValue=[];
+
+function fillCellValue()
+{
+  cellValue=[];
+  cellValue.push('S','M','T','W','T','F','S');
+  for (let i=7;i<49;i++) cellValue.push(i);
+  console.log(cellValue);
+  return cellValue;
+}
+
+cellValue=fillCellValue();
 
 // class Calendar extends React.Component {
 //   constructor(props) {
@@ -55,14 +67,33 @@ class Hello extends React.Component {
   }
 }
 
+class CalendarSheetElement extends React.Component {
+  render() {
+    const elements = [];
+    for (let i=0; i<49; ++i) {
+      elements.push(<a className={styles.calendarTableCell}>{cellValue[i]}</a>);
+    }
+    if (!this.props.sheet)
+      return (
+        <div className={styles.calendarDay}>{currentDateDay}</div>
+      )
+    else 
+      return (
+      // <a>!!!!</a>
+      <div className={styles.calendarTable}>
+        {elements}
+      </div>
+      )
+  }
+}
+
 class CalendarSheet extends React.Component {
   render() {
-    // return <div className={this.props.className}>Привет, {this.props.toWhat}!</div>;
     return (
       <article className={styles.calendarSheet}>
         <h3 style={this.props.style}>{this.props.text}</h3>
+        <CalendarSheetElement sheet={this.props.sheet}/>
       </article>
-
     )
   }
 }
@@ -73,15 +104,13 @@ class Calendar extends React.Component {
     this.state = {
 //      currentDate: new Date()
     }
-  }
-  
+  }  
   render() {
     return (
       <article className={styles.calendarContainer}>
         {/* <Hello className={styles.calendarSheet} toWhat="мир" /> */}
-        {/* <CalendarSheet className={styles.calendarSheet} text={currentDateWeekDay} style={{font-weight: 'normal'}} /> */}
-        <CalendarSheet className={styles.calendarSheet} text={currentDateWeekDay} />
-        <CalendarSheet className={styles.calendarSheet} text={currentDateMonthYear}/>
+        <CalendarSheet className={styles.calendarSheet} text={currentDateWeekDay} sheet={0} style={{fontWeight:'normal'}}/>
+        <CalendarSheet className={styles.calendarSheet} text={currentDateMonthYear} sheet={1}/>
       </article>
     )
   }
