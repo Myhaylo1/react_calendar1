@@ -23,10 +23,8 @@ function fillCellValue()
   for (let i=7;i<49;i++) cellValue.push('');
   let firstWeekDay=currentDateDay % 7;
   if (currentDateDayOfWeek<firstWeekDay-1) firstWeekDay=currentDateDayOfWeek+8-firstWeekDay; else firstWeekDay=Math.abs(firstWeekDay-currentDateDayOfWeek-1);
-//  for (let i=7;i<7+firstWeekDay;i++) cellValue[i]='';
   let j=1;
   for (let i=firstWeekDay+7;i<firstWeekDay+7+dayInMonth[currentDateMonth];i++) cellValue[i]=j++;  
-  console.log(firstWeekDay,dayInMonth[currentDateMonth],currentDateDayOfWeek,' ',currentDateWeekDay,cellValue);
   return cellValue;
 }
 
@@ -72,33 +70,51 @@ cellValue=fillCellValue();
 //   }
 // }
 
+// constructor(props) {
+//   super(props);
+//   this.state = {
+// //      currentDate: new Date()
+//   }
+// }  
+
 class CalendarSheetElement extends React.Component {
   render() {
-    const elements = [];
-    for (let i=0; i<49; ++i) {
-//      elements.push(<a className={styles.calendarTableCell}>{cellValue[i]}</a>);
-      elements.push(<a key={i} className={styles.calendarTableCell} style={{borderColor: currentDateDay!==cellValue[i]?'white':'red'}}>{cellValue[i]}</a>);
-    }
     if (!this.props.sheet)
       return (
-        <div className={styles.calendarDay}>{currentDateDay}</div>
+        <div className={styles.calendarDay} style={{color: 'white'}}>{currentDateDay}</div>
       )
-    else 
-      return (
-      // <a>!!!!</a>
+    else {
+        const elements = [];
+    for (let i=0; i<49; ++i) {
+//      elements.push(<a className={styles.calendarTableCell}>{cellValue[i]}</a>);
+      elements.push(<a key={i} className={styles.calendarTableCell} style={{borderColor: currentDateDay!==cellValue[i]?'white':'red', color: (currentDateDay!==cellValue[i] && i>6)?'lightseagreen':'red'}}>{cellValue[i]}</a>);
+    }
+    return (
       <div className={styles.calendarTable}>
         {elements}
       </div>
       )
+    }  
   }
 }
 
 class CalendarSheet extends React.Component {
   render() {
-    console.log(this.props);
+    // if (!this.props.sheet) {
+    //   let styleH3={fontWeight:'normal', color:'white'};
+    //   let styleArticle={backgroundColor: '#30e9ca'};
+    // } else {
+    //   let styleH3={color:'lightseagreen'};
+    // }
+    // return (
+    //   <article className={styles.calendarSheet} style={styleArticle}>
+    //     <h3 style={styleH3}>{this.props.text}</h3>
+    //     <CalendarSheetElement sheet={this.props.sheet}/>
+    //   </article>
+    // )
     return (
-      <article className={styles.calendarSheet}>
-        <h3 style={this.props.style}>{this.props.text}</h3>
+      <article className={styles.calendarSheet} style={this.props.styleArticle}>
+        <h3 style={this.props.styleH3}>{this.props.text}</h3>
         <CalendarSheetElement sheet={this.props.sheet}/>
       </article>
     )
@@ -106,18 +122,13 @@ class CalendarSheet extends React.Component {
 }
 
 class Calendar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-//      currentDate: new Date()
-    }
-  }  
   render() {
     return (
       <article className={styles.calendarContainer}>
-        {/* <Hello className={styles.calendarSheet} toWhat="мир" /> */}
-        <CalendarSheet className={styles.calendarSheet} text={currentDateWeekDay} sheet={0} style={{fontWeight:'normal'}}/>
-        <CalendarSheet className={styles.calendarSheet} text={currentDateMonthYear} sheet={1}/>
+        {/* <CalendarSheet text={currentDateWeekDay} sheet={0}/>
+        <CalendarSheet text={currentDateMonthYear} sheet={1}/> */}
+        <CalendarSheet text={currentDateWeekDay} sheet={0} styleH3={{fontWeight:'normal', color:'white'}} styleArticle={{backgroundColor: '#30e9ca'}}/>
+        <CalendarSheet text={currentDateMonthYear} sheet={1} styleH3={{color:'lightseagreen'}} />
       </article>
     )
   }
