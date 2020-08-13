@@ -3,8 +3,13 @@ import React from 'react';
 import Calendar from './components/Calendar';
 
 function App() {
-//  return <Stopwatch />;
-  return <Calendar />;
+  //  return <Stopwatch />;
+  return (
+    <>
+      <Calendar currentDate={new Date()} />
+      {/* <Calendar currentDate={new Date(2020, 5 - 1, 11)} /> */}
+    </>
+  )
 }
 
 export default App;
