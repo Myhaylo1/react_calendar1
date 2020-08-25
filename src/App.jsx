@@ -1,13 +1,11 @@
 import React from 'react';
-//import Stopwatch from './components/Stopwatch';
-import Calendar from './components/Calendar';
+import Calendar2 from './components/Calendar2';
 
 function App() {
-  //  return <Stopwatch />;
   return (
     <>
-      <Calendar currentDate={new Date()} />
-      {/* <Calendar currentDate={new Date(2020, 5 - 1, 11)} /> */}
+      <Calendar2 currentDate={new Date()} />
+      <Calendar2 currentDate={new Date(2020, 5 - 1, 11)} />
     </>
   )
 }
